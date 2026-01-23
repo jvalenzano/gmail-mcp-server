@@ -51,4 +51,9 @@ export interface CreateEventArgs {
   status?: EventStatus;
 }
 
+export interface DeleteEventArgs {
+  eventId: string;
+  sendNotifications?: boolean;
+}
+
 export { EventStatus };

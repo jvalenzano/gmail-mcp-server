@@ -5,6 +5,7 @@ import { SEND_EMAIL_TOOL, handleSendEmail } from './messages/send.js';
 import { LIST_EVENTS_TOOL, handleListEvents } from './calendar/list.js';
 import { READ_EVENT_TOOL, handleReadEvent } from './calendar/read.js';
 import { CREATE_EVENT_TOOL, handleCreateEvent } from './calendar/create.js';
+import { DELETE_EVENT_TOOL, handleDeleteEvent } from './calendar/delete.js';
 import { LIST_DRAFTS_TOOL, handleListDrafts } from './drafts/list.js';
 import { READ_DRAFT_TOOL, handleReadDraft } from './drafts/read.js';
 import { DELETE_DRAFT_TOOL, handleDeleteDraft } from './drafts/delete.js';
@@ -18,6 +19,7 @@ export const TOOLS = [
   LIST_EVENTS_TOOL,
   READ_EVENT_TOOL,
   CREATE_EVENT_TOOL,
+  DELETE_EVENT_TOOL,
   LIST_DRAFTS_TOOL,
   READ_DRAFT_TOOL,
   DELETE_DRAFT_TOOL,
@@ -32,6 +34,7 @@ export const TOOL_HANDLERS: Record<string, (args: Record<string, unknown>) => Pr
   [LIST_EVENTS_TOOL.name]: handleListEvents,
   [READ_EVENT_TOOL.name]: handleReadEvent,
   [CREATE_EVENT_TOOL.name]: handleCreateEvent,
+  [DELETE_EVENT_TOOL.name]: handleDeleteEvent,
   [LIST_DRAFTS_TOOL.name]: handleListDrafts,
   [READ_DRAFT_TOOL.name]: handleReadDraft,
   [DELETE_DRAFT_TOOL.name]: handleDeleteDraft,

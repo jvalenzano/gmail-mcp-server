@@ -1,6 +1,6 @@
 import { calendar } from '../../config/auth.js';
 import { CALENDAR_CONSTANTS, DEFAULTS } from '../../config/constants.js';
-import { ListEventsArgs, ReadEventArgs, CalendarResponse, CreateEventArgs } from './types.js';
+import { ListEventsArgs, ReadEventArgs, CalendarResponse, CreateEventArgs, DeleteEventArgs } from './types.js';
 import { DateTime } from 'luxon';
 import { calendar_v3 } from 'googleapis';
 import { GaxiosError } from 'gaxios';
@@ -174,9 +174,51 @@ export class CalendarService {
       throw error;
     }
   }
+
+  static async deleteEvent({ 
+    eventId, 
+    sendNotifications = true 
+  }: DeleteEventArgs): Promise<CalendarResponse> {
+    try {
+      await calendar.events.delete({
+        calendarId: 'primary',
+        eventId,
+        sendNotifications
+      });
+
+      return {
+        content: [{
+          type: "text",
+          text: `Event deleted successfully. Event ID: ${eventId}`
+        }]
+      };
+    } catch (error) {
+      console.error('Calendar deleteEvent error:', error);
+      if (error instanceof GaxiosError) {
+        if (error.response?.status === 404) {
+          return {
+            content: [{
+              type: "text",
+              text: `Event not found. The event may have already been deleted.`
+            }],
+            isError: true
+          };
+        }
+        return {
+          content: [{
+            type: "text",
+            text: `Failed to delete event: ${error.message}`
+          }],
+          isError: true
+        };
+      }
+      throw error;
+    }
+  }
 }
 
 // Re-export for backward compatibility
 export const listEvents = CalendarService.listEvents.bind(CalendarService);
 export const readEvent = CalendarService.readEvent.bind(CalendarService);
 export const createEvent = CalendarService.createEvent.bind(CalendarService);
+export const deleteEvent = CalendarService.deleteEvent.bind(CalendarService);
