@@ -10,6 +10,10 @@ import { LIST_DRAFTS_TOOL, handleListDrafts } from './drafts/list.js';
 import { READ_DRAFT_TOOL, handleReadDraft } from './drafts/read.js';
 import { DELETE_DRAFT_TOOL, handleDeleteDraft } from './drafts/delete.js';
 import { UPDATE_DRAFT_TOOL, handleUpdateDraft } from './drafts/update.js';
+import { LIST_LABELS_TOOL, handleListLabels } from './labels/list.js';
+import { CREATE_LABEL_TOOL, handleCreateLabel } from './labels/create.js';
+import { DELETE_LABEL_TOOL, handleDeleteLabel } from './labels/delete.js';
+import { MODIFY_MESSAGE_LABELS_TOOL, handleModifyMessageLabels } from './labels/modify.js';
 
 export const TOOLS = [
   LIST_MESSAGES_TOOL,
@@ -23,7 +27,11 @@ export const TOOLS = [
   LIST_DRAFTS_TOOL,
   READ_DRAFT_TOOL,
   DELETE_DRAFT_TOOL,
-  UPDATE_DRAFT_TOOL
+  UPDATE_DRAFT_TOOL,
+  LIST_LABELS_TOOL,
+  CREATE_LABEL_TOOL,
+  DELETE_LABEL_TOOL,
+  MODIFY_MESSAGE_LABELS_TOOL
 ];
 
 export const TOOL_HANDLERS: Record<string, (args: Record<string, unknown>) => Promise<any>> = {
@@ -38,5 +46,9 @@ export const TOOL_HANDLERS: Record<string, (args: Record<string, unknown>) => Pr
   [LIST_DRAFTS_TOOL.name]: handleListDrafts,
   [READ_DRAFT_TOOL.name]: handleReadDraft,
   [DELETE_DRAFT_TOOL.name]: handleDeleteDraft,
-  [UPDATE_DRAFT_TOOL.name]: handleUpdateDraft
+  [UPDATE_DRAFT_TOOL.name]: handleUpdateDraft,
+  [LIST_LABELS_TOOL.name]: handleListLabels,
+  [CREATE_LABEL_TOOL.name]: handleCreateLabel,
+  [DELETE_LABEL_TOOL.name]: handleDeleteLabel,
+  [MODIFY_MESSAGE_LABELS_TOOL.name]: handleModifyMessageLabels
 };

@@ -57,6 +57,22 @@ export interface DeleteDraftArgs {
   draftId: string;
 }
 
+export interface CreateLabelArgs {
+  name: string;
+  labelListVisibility?: string;
+  messageListVisibility?: string;
+}
+
+export interface DeleteLabelArgs {
+  labelId: string;
+}
+
+export interface ModifyMessageLabelsArgs {
+  messageId: string;
+  addLabelIds?: string[];
+  removeLabelIds?: string[];
+}
+
 export interface GmailHeader {
   name: string;
   value: string;
